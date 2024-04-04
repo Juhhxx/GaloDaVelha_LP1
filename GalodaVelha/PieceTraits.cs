@@ -3,7 +3,7 @@ using System;
 namespace GalodaVelha
 {
     [Flags]
-    enum PieceTraits
+    public enum PieceTraits
     {
         Size = 1 << 0, //if this trait is active then the piece is big,
                     // otherwise it is small
@@ -13,10 +13,7 @@ namespace GalodaVelha
                     //otherwise it is cilindrical
         Fill = 1 << 3,  //if this trait is active then the piece has a filling,
                     //otherwise it has a hole
-        Validity = 1 << 4,  //if this trait is active then the piece is OffBoard
-                    //otherwise it is OnBoard and invalid to be chosen
-
-
+        Wrong = 1 << 4
 
     }
 }

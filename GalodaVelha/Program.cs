@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace GalodaVelha
 {
@@ -10,6 +11,7 @@ namespace GalodaVelha
             ColoredText(s, ConsoleColor.Red);
             ColoredText(s, ConsoleColor.Green);
             ColoredText(s, ConsoleColor.Blue);
+
         }
         static private void ColoredText(string str, ConsoleColor color)
         {

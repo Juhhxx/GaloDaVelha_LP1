@@ -18,7 +18,7 @@ namespace GalodaVelha
         }
         private void GameStart()
         {
-
+            Console.WriteLine();
         }
     }
 }

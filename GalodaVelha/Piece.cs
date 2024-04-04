@@ -35,15 +35,12 @@ namespace GalodaVelha
             }
             else
             {
-
                 this.myPiece = newPiece;
                 piecesCreated[piecesCount] = myPiece;
                 piecesCount += 1;
-
             }
 
         }
-
         static Piece()
         {
             piecesCreated = new PieceTraits[16];
@@ -85,7 +82,6 @@ namespace GalodaVelha
             }
             return myPiece;
         }
-
         private bool InArray(PieceTraits myPiece)
         {
             bool presence = false;
@@ -99,47 +95,31 @@ namespace GalodaVelha
             Console.WriteLine(presence);
             return presence;
         }
-
         public string GetTrait()
         {
             string check = "";
-            if((myPiece & PieceTraits.Size) == PieceTraits.Size)
-            {
-                check += "big ";
-            }
-            else
-            {
-                check += "tiny ";
-            }
 
-            if((myPiece & PieceTraits.Color) == PieceTraits.Color)
-            {
-                check += "light ";
-            }
-            else
-            {
-                check += "dark ";
-            }
-
-            if((myPiece & PieceTraits.Shape) == PieceTraits.Shape)
-            {
-                check += "cubic ";
-            }
-            else
-            {
-                check += "spherical ";
-            }
-
-            if((myPiece & PieceTraits.Fill) == PieceTraits.Fill)
-            {
-                check += "fill ";
-            }
-            else
-            {
-                check += "empty ";
-            }
-
+            check += CheckForTrait(PieceTraits.Size,"big ","tiny ");
+            check += CheckForTrait(PieceTraits.Color,"light ","dark ");
+            check += CheckForTrait(PieceTraits.Shape,"cubic  ","spherical ");
+            check += CheckForTrait(PieceTraits.Fill,"filled ","empty ");
+            
             return check;
+        }
+        private string CheckForTrait(PieceTraits trait,string result1,string result2)
+        {
+            string traitName = "";
+
+            if ((myPiece & trait) == trait)
+            {
+                traitName = result1;
+            }
+            else
+            {
+                traitName = result2;
+            }
+
+            return traitName;
         }
     }
 }

@@ -12,6 +12,9 @@ namespace GalodaVelha
             ColoredText(s, ConsoleColor.Green);
             ColoredText(s, ConsoleColor.Blue);
 
+            Piece Afonso = new Piece("tdce");
+            Console.WriteLine(Afonso.GetTrait());
+
         }
         static private void ColoredText(string str, ConsoleColor color)
         {

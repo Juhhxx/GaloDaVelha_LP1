@@ -7,9 +7,6 @@ namespace GalodaVelha
 {
     public class GameBoard
     {
-        public void A()
-        {
-            Console.WriteLine("aaaa");
-        }
+        
     }
 }

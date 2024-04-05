@@ -111,7 +111,7 @@ namespace GalodaVelha
 
             traits += CheckForTrait(PieceTraits.Size,"big ","tiny ");
             traits += CheckForTrait(PieceTraits.Color,"light ","dark ");
-            traits += CheckForTrait(PieceTraits.Shape,"cubic  ","spherical ");
+            traits += CheckForTrait(PieceTraits.Shape,"square ","circle ");
             traits += CheckForTrait(PieceTraits.Fill,"filled ","empty ");
             
             return traits;
@@ -124,17 +124,17 @@ namespace GalodaVelha
         {
             return name;
         }
-        private string CheckForTrait(PieceTraits trait,string result1,string result2)
+        private string CheckForTrait(PieceTraits trait,string res1,string res2)
         {
             string traitName;
 
             if ((myPiece & trait) == trait)
             {
-                traitName = result1;
+                traitName = res1;
             }
             else
             {
-                traitName = result2;
+                traitName = res2;
             }
 
             return traitName;

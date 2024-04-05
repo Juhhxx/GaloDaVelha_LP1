@@ -103,6 +103,33 @@ namespace GalodaVelha
             }
             return check;
         }
-       
+        public void PrintBoard()
+        {
+            ColoredText("     A   B   C   D\n",ConsoleColor.Yellow);
+            Console.WriteLine("   +---+---+---+---+");
+            ColoredText(" 1",ConsoleColor.Green);
+            Console.WriteLine($" | {board[0,0]} | {board[1,0]} |" +
+            $" {board[2,0]} | {board[3,0]} |");
+            Console.WriteLine("   +---+---+---+---+");
+            ColoredText(" 2",ConsoleColor.Green);
+            Console.WriteLine($" | {board[0,1]} | {board[1,1]} |" +
+            $" {board[2,1]} | {board[3,1]} |");
+            Console.WriteLine("   +---+---+---+---+");
+            ColoredText(" 3",ConsoleColor.Green);
+            Console.WriteLine($" | {board[0,2]} | {board[1,2]} |" +
+            $" {board[2,2]} | {board[3,2]} |");
+            Console.WriteLine("   +---+---+---+---+");
+            ColoredText(" 4",ConsoleColor.Green);
+            Console.WriteLine($" | {board[0,3]} | {board[1,3]} |" +
+            $" {board[2,3]} | {board[3,3]} |");
+            Console.WriteLine("   +---+---+---+---+");
+        }
+        private void ColoredText(string str, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.Write(str);
+            Console.ResetColor();
+        }
+
     }
 }

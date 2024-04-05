@@ -13,6 +13,8 @@ namespace GalodaVelha
     {
         //Initialize board array
         string[,] board;
+        //Initialize infoBoard array
+        Piece[,] infoBoard;
         //Initialize player value
         string player = "testValue";
         
@@ -26,6 +28,7 @@ namespace GalodaVelha
                                           {" "," "," "," "},
                                           {" "," "," "," "},
                                           {" "," "," "," "}};
+            this.infoBoard = new Piece[4,4];
         }
         /// <summary>
         /// Call AskForPiece() and AskForCoords() methods and insert the
@@ -37,8 +40,11 @@ namespace GalodaVelha
             Piece placePiece = AskForPiece(); 
             //Get the coordinates where the player wants to put the piece
             int[] placeCoords = AskForCoords();
-            //Insert the piece into the board matrix with the specefied coords
+            //Insert the piece name into the board matrix with the 
+            //specified coords
             board[placeCoords[0],placeCoords[1]] = placePiece.GetName();
+            //Insert the piece into the board matrix with the specified coords
+            infoBoard[placeCoords[0],placeCoords[1]] = placePiece;
         }
         /// <summary>
         /// Ask the adversary what piece they want to give to the player.
@@ -210,6 +216,12 @@ namespace GalodaVelha
             Console.Write(str);
             //Reset console color
             Console.ResetColor();
+        }
+        private bool CheckForGameWin(int[] lastCoords)
+        {
+            bool check = false;
+
+            return check;
         }
 
     }

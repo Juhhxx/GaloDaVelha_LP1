@@ -9,21 +9,50 @@ using System.Xml.Schema;
 
 namespace GalodaVelha
 {
+    /// <summary>
+    /// Class that controls how pieces are created, work and their traits.
+    /// </summary>
     public class Piece
     {
+        //Intialize myPiece enum code
         PieceTraits myPiece;
-        string code;
-        static string[] piecesCreated;
+        //Initialize newPiece enum code
         PieceTraits newPiece;
-        static int piecesCount;
-        public bool validity = true;
+        //Initialize code string
+        string code;
+        //Initialize piece name
         string name;
+        //Initialize piece validity
+        public bool validity;
+        //Initialize static array piecesCreated that will keep track of
+        //what pieces were created
+        static string[] piecesCreated;
+        //Initialize static int piecesCount that counts how many pieces were
+        //created
+        static int piecesCount;
+
+        /// <summary>
+        /// Constructor for Piece class.
+        /// </summary>
+        /// <param name="code">4 letter code that describes the piece.</param>
         public Piece(string code)
         {
+            //Declare instance variables
             this.code = code;
             this.name = "A";
+            //Decode the given 4 letter string 
             this.newPiece = Decode(code);
+            validity = true;
 
+            InitializePiece();
+        }
+        static Piece()
+        {
+            piecesCreated = new string[16];
+            piecesCount = 0;
+        }  
+        private void InitializePiece()
+        {
             if (code.Length >= 5)
             {
                 Console.WriteLine("Invalid code, too many characters.");
@@ -48,13 +77,7 @@ namespace GalodaVelha
                 piecesCreated[piecesCount] = GetTrait();
                 piecesCount += 1;
             }
-
         }
-        static Piece()
-        {
-            piecesCreated = new string[16];
-            piecesCount = 0;
-        }  
         private PieceTraits Decode(string code)
         {  
             foreach(char c in code)

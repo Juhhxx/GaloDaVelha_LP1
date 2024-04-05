@@ -8,8 +8,6 @@ namespace GalodaVelha
         static void Main(string[] args)
         {
             
-            
-
         }
         static private void ColoredText(string str, ConsoleColor color)
         {

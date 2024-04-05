@@ -7,13 +7,8 @@ namespace GalodaVelha
     {
         static void Main(string[] args)
         {
-            string s = "Test Print";
-            ColoredText(s, ConsoleColor.Red);
-            ColoredText(s, ConsoleColor.Green);
-            ColoredText(s, ConsoleColor.Blue);
-
-            Piece Afonso = new Piece("tdce");
-            Console.WriteLine(Afonso.GetTrait());
+            
+            
 
         }
         static private void ColoredText(string str, ConsoleColor color)

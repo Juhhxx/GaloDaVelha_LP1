@@ -16,22 +16,31 @@ namespace GalodaVelha
         static PieceTraits[] piecesCreated; //= new PieceTraits[16];
         PieceTraits newPiece;
         static int piecesCount;
+        public bool validity = true;
+        string name;
         public Piece(string code)
         {
             this.code = code;
+            this.name = "A";
             this.newPiece = Decode(code);
 
-            if ((newPiece & PieceTraits.Wrong) == PieceTraits.Wrong )
+            if (code.Length >= 5)
             {
-                Console.WriteLine("Invalid code, try again");
-                this.myPiece = PieceTraits.Wrong;
-                return;
+                Console.WriteLine("Invalid code, too many characters.");
+                Console.WriteLine("Please try again.\n");
+                validity = false;
+            }
+            else if ((newPiece & PieceTraits.Wrong) == PieceTraits.Wrong )
+            {
+                Console.WriteLine("Invalid code, non existant trait.");
+                Console.WriteLine("Please try again.\n");
+                validity = false;
             }
             else if(InArray(newPiece))
             {
-                Console.WriteLine("This piece was already placed. Try again");
-                this.myPiece = PieceTraits.Wrong;
-                return;
+                Console.WriteLine("This piece was already placed.");
+                Console.WriteLine("Please try again.\n");
+                validity = false;
             }
             else
             {
@@ -60,7 +69,7 @@ namespace GalodaVelha
                         myPiece ^= PieceTraits.Color;
                         break;
 
-                    case 'c':
+                    case 's':
                         myPiece ^= PieceTraits.Shape;
                         break;
 
@@ -69,7 +78,7 @@ namespace GalodaVelha
                         break;
 
                     default:
-                        if (c == 't' || c == 'd' || c == 's' || c == 'e') 
+                        if (c == 't' || c == 'd' || c == 'c' || c == 'e') 
                         {
                             break;
                         }
@@ -84,16 +93,15 @@ namespace GalodaVelha
         }
         private bool InArray(PieceTraits myPiece)
         {
-            bool presence = false;
+            bool check = false;
             foreach(PieceTraits p in piecesCreated)
             {
                 if (myPiece == p)
                 {
-                    presence = true;
+                    check = true;
                 }
             }
-            Console.WriteLine(presence);
-            return presence;
+            return check;
         }
         public string GetTrait()
         {
@@ -105,6 +113,14 @@ namespace GalodaVelha
             check += CheckForTrait(PieceTraits.Fill,"filled ","empty ");
             
             return check;
+        }
+        public bool GetInArray()
+        {
+            return InArray(this.myPiece);
+        }
+        public string GetName()
+        {
+            return name;
         }
         private string CheckForTrait(PieceTraits trait,string result1,string result2)
         {

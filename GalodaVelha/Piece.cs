@@ -111,7 +111,7 @@ namespace GalodaVelha
 
             traits += CheckForTrait(PieceTraits.Size,"big ","tiny ");
             traits += CheckForTrait(PieceTraits.Color,"light ","dark ");
-            traits += CheckForTrait(PieceTraits.Shape,"cubic ","spherical ");
+            traits += CheckForTrait(PieceTraits.Shape,"square ","circle ");
             traits += CheckForTrait(PieceTraits.Fill,"filled ","empty ");
             
             return traits;

@@ -43,3 +43,17 @@ Para este projeto, escolhemos dividi-lo em 3 classes diferentes e ainda duas enu
     - Enumeração bit a bit que contém os vários tipos de traits que uma peça pode ter;
 5. Enum XCoords
     - Enumeração que contém uma correspondência entre letras (A,B,C,D) e valores inteiros (1,2,3,4 correspondentemente) de forma a numerar o eixo horizontal do tabuleiro, perservando uma nomenclatura clássica vista em vários tabuleiros;
+
+### Fluxograma
+
+´´´mermaid
+    graph LR
+    A[square Rect] -- Link Text --> B((circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+```
+
+## Referências
+
+Neste projeto recorreu-se apenas a [esta biblioteca de códigos Unicode](https://symbl.cc/en/). Tirando esta referência, não foram realizadas trocas de ideias com colegas nem foram utilizados pedaços de código gerado por IAs generativas ou outros pedaçoes de código aberto ou bibliotecas de terceiros.

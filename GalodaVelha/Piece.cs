@@ -11,9 +11,9 @@ namespace GalodaVelha
 {
     public class Piece
     {
-        PieceTraits myPiece = 0;
+        PieceTraits myPiece;
         string code;
-        static PieceTraits[] piecesCreated; //= new PieceTraits[16];
+        static string[] piecesCreated;
         PieceTraits newPiece;
         static int piecesCount;
         public bool validity = true;
@@ -36,7 +36,7 @@ namespace GalodaVelha
                 Console.WriteLine("Please try again.\n");
                 validity = false;
             }
-            else if(InArray(newPiece))
+            else if(InArray(GetTrait()))
             {
                 Console.WriteLine("This piece was already placed.");
                 Console.WriteLine("Please try again.\n");
@@ -45,14 +45,14 @@ namespace GalodaVelha
             else
             {
                 this.myPiece = newPiece;
-                piecesCreated[piecesCount] = myPiece;
+                piecesCreated[piecesCount] = GetTrait();
                 piecesCount += 1;
             }
 
         }
         static Piece()
         {
-            piecesCreated = new PieceTraits[16];
+            piecesCreated = new string[16];
             piecesCount = 0;
         }  
         private PieceTraits Decode(string code)
@@ -62,19 +62,19 @@ namespace GalodaVelha
                 switch (c)
                 {
                     case 'b':
-                        myPiece ^= PieceTraits.Size;
+                        newPiece ^= PieceTraits.Size;
                         break;
 
                     case 'l':
-                        myPiece ^= PieceTraits.Color;
+                        newPiece ^= PieceTraits.Color;
                         break;
 
                     case 's':
-                        myPiece ^= PieceTraits.Shape;
+                        newPiece ^= PieceTraits.Shape;
                         break;
 
                     case 'f':
-                        myPiece ^= PieceTraits.Fill;
+                        newPiece ^= PieceTraits.Fill;
                         break;
 
                     default:
@@ -84,39 +84,41 @@ namespace GalodaVelha
                         }
                         else
                         {
-                            myPiece ^= PieceTraits.Wrong;
+                            newPiece ^= PieceTraits.Wrong;
                             break;
                         }
                 }
             }
-            return myPiece;
+            return newPiece;
         }
-        private bool InArray(PieceTraits myPiece)
+        private bool InArray(string piece)
         {
             bool check = false;
-            foreach(PieceTraits p in piecesCreated)
+            foreach(string p in piecesCreated)
             {
-                if (myPiece == p)
+                Console.WriteLine(p);
+                if (piece == p)
                 {
                     check = true;
                 }
             }
+            Console.WriteLine($"InArray - Piece Code: {newPiece} Result: {check}");
             return check;
         }
         public string GetTrait()
         {
-            string check = "";
+            string traits = "";
 
-            check += CheckForTrait(PieceTraits.Size,"big ","tiny ");
-            check += CheckForTrait(PieceTraits.Color,"light ","dark ");
-            check += CheckForTrait(PieceTraits.Shape,"cubic  ","spherical ");
-            check += CheckForTrait(PieceTraits.Fill,"filled ","empty ");
+            traits += CheckForTrait(PieceTraits.Size,"big ","tiny ");
+            traits += CheckForTrait(PieceTraits.Color,"light ","dark ");
+            traits += CheckForTrait(PieceTraits.Shape,"cubic  ","spherical ");
+            traits += CheckForTrait(PieceTraits.Fill,"filled ","empty ");
             
-            return check;
+            return traits;
         }
         public bool GetInArray()
         {
-            return InArray(this.myPiece);
+            return InArray(GetTrait());
         }
         public string GetName()
         {
@@ -124,7 +126,7 @@ namespace GalodaVelha
         }
         private string CheckForTrait(PieceTraits trait,string result1,string result2)
         {
-            string traitName = "";
+            string traitName;
 
             if ((myPiece & trait) == trait)
             {

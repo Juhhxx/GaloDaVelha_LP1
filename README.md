@@ -1,1 +1,43 @@
-This is a template
+# Galo da Velha
+
+## Autoria
+
+Trabalho realizado por:
+- Afonso Cunha a22302960
+  - Responsável por:
+    - Código da Classe Piece;
+- Júlia Costa a22304403
+  - Responsável por:
+    - Código da Classe GameBoard;
+
+[URL para o repositório Git](https://github.com/Juhhxx/GaloDaVelha_LP1)
+
+## Arquitetura da solução
+
+### Descrição
+
+Para este projeto, escolhemos dividi-lo em 3 classes diferentes e ainda duas enumerações (não contando com o ficheiro Program):
+
+1. Class GameManager
+   - Responsável "gerir" o jogo onde pertencem os métodos:
+     - GameSetup() - estabelece as condições referentes ao estado zero do jogo;
+     - GameStart() - chama o GameSetup() e inicia o game loop, chamando também outros métodos que sejam necessários da class gameBoard;
+2. Class Piece
+    - Responsável por funções associadas à instanciação de peças assim como as suas características:
+      - Decode(string code) - recebendo uma string do código correspondente a uma peça, configura os traits da instância da classe Piece com recurso à Enum PieceTraits, retornando o código Enum que representa esta instância;
+      - InArray(string piece) - recebendo uma string (obtida através do GetTrait()) que contem os traits da peça, verifica se essa "peça" está já registada no array que tem como objetivo guardar um log das peças instanciadas, retorna um booleano;
+      - GetTrait() - constroi e retorna uma string que contem os vários traits da instancia da peça;
+      - GetInArray() - por definir
+      - GetName()
+      - CheckForTrait(PieceTraits trait, string result1, string result2)
+3. Class GameBoard
+    - Reponsável pela interface e ações de jogadores assim como verificação de estado do jogo:
+      - AskForInputs() - chama os métoos AskForPiece() e AskForCoords() e insere a peça na matriz tabuleiro;
+      - AskForPiece() - pede pelo input de um código de traits correspondente a uma peça que o jogador quer que o outro jogador coloque futuramente, retorna a peça desejada pelo utilizador;
+      - AskForCoords() - pede pelo input de coordenadas do tabuleiro (e.x "A3) onde o jogador deseja colocar a peça, retorna um array de inteiros correspondentes às coordenadas desejadas;
+      - CheckCoordInRange(string coord) - recebe a string correspondente às coordenadas onde o jogador deseja colocar a peça e verifica se essas coordenadas existem no tabuleiro, retornando um booleano;
+      - CoordIsEmpty(int[] coord) - recebe um array com inteiros correspondentes às coordenadas onde o jogador deseja colocar a peça e verifica se esse espaço já está ocupado por outra peça, retorna um booleano;
+      - PrintBoard() - imprime o tabuleiro na consola;
+      - ColoredText(string str, ConsoleColor color) - imprime uma string coma  cor especificada;
+4. Enum PieceTraits
+5. Enum XCoords

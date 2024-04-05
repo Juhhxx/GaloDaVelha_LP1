@@ -28,8 +28,8 @@ Para este projeto, escolhemos dividi-lo em 3 classes diferentes e ainda duas enu
       - InArray(string piece) - recebendo uma string (obtida através do GetTrait()) que contem os traits da peça, verifica se essa "peça" está já registada no array que tem como objetivo guardar um log das peças instanciadas, retorna um booleano;
       - GetTrait() - constroi e retorna uma string que contem os vários traits da instancia da peça;
       - GetInArray() - por definir
-      - GetName()
-      - CheckForTrait(PieceTraits trait, string result1, string result2)
+      - GetName() - retorna o caracter Unicode que representará a peça;
+      - CheckForTrait(PieceTraits trait, string res1, string res2) - verifica se a trait (e.x big) nessa peça está ativa ou não, se a trait tiver ativa, devolve a string correspondente ao trait ativo ("big") e s tiver iantivo devolve a string para o trait inativo ("tiny");
 3. Class GameBoard
     - Reponsável pela interface e ações de jogadores assim como verificação de estado do jogo:
       - AskForInputs() - chama os métoos AskForPiece() e AskForCoords() e insere a peça na matriz tabuleiro;
@@ -40,4 +40,6 @@ Para este projeto, escolhemos dividi-lo em 3 classes diferentes e ainda duas enu
       - PrintBoard() - imprime o tabuleiro na consola;
       - ColoredText(string str, ConsoleColor color) - imprime uma string coma  cor especificada;
 4. Enum PieceTraits
+    - Enumeração bit a bit que contém os vários tipos de traits que uma peça pode ter;
 5. Enum XCoords
+    - Enumeração que contém uma correspondência entre letras (A,B,C,D) e valores inteiros (1,2,3,4 correspondentemente) de forma a numerar o eixo horizontal do tabuleiro, perservando uma nomenclatura clássica vista em vários tabuleiros;

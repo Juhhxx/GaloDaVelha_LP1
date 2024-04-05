@@ -5,10 +5,12 @@
 Trabalho realizado por:
 - Afonso Cunha a22302960
   - Responsável por:
-    - Código da Classe Piece;
+    - Maior parte do código da Classe Piece;
 - Júlia Costa a22304403
   - Responsável por:
+    - Parte do código da Classe Piece;
     - Código da Classe GameBoard;
+    - Documentação das Classes GameBoard e Piece;
 
 [URL para o repositório Git](https://github.com/Juhhxx/GaloDaVelha_LP1)
 

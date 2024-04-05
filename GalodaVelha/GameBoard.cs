@@ -11,12 +11,14 @@ namespace GalodaVelha
     /// </summary>
     public class GameBoard
     {
+        //Initialize board array
         string[,] board;
+        //Initialize player value
         string player = "testValue";
-        int[] placeCoords;
-        Piece placePiece;
+        
         public GameBoard()
         {
+            //Declare the array as "empty", only blank spaces
             this.board = new string[4,4] {{" "," "," "," "},
                                           {" "," "," "," "},
                                           {" "," "," "," "},
@@ -29,9 +31,9 @@ namespace GalodaVelha
         public void AskForInputs()
         {
             //Get what piece the adversary wants to be played
-            placePiece = AskForPiece(); 
+            Piece placePiece = AskForPiece(); 
             //Get the coordinates where the player wants to put the piece
-            placeCoords = AskForCoords();
+            int[] placeCoords = AskForCoords();
             //Insert the piece into the board matrix with the specefied coords
             board[placeCoords[0],placeCoords[1]] = placePiece.GetName();
         }

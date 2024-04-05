@@ -18,7 +18,12 @@ namespace GalodaVelha
                                           {" "," "," "," "},
                                           {" "," "," "," "}};
         }
-
+        public void AskForInputs()
+        {
+            placePiece = AskForPiece();
+            placeCoords = AskForCoords();
+            board[placeCoords[0],placeCoords[1]] = placePiece.GetName();
+        }
         private Piece AskForPiece()
         {
             Console.Write($"{player} choose a piece:\n>");
@@ -88,7 +93,6 @@ namespace GalodaVelha
             }
             return presence;
         }
-        
         private bool CoordIsEmpty(int[] coord)
         {
             bool check = false;

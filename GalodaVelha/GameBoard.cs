@@ -16,6 +16,9 @@ namespace GalodaVelha
         //Initialize player value
         string player = "testValue";
         
+        /// <summary>
+        /// Constructor for GameBoard class.
+        /// </summary>
         public GameBoard()
         {
             //Declare the array as "empty", only blank spaces

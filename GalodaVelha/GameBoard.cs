@@ -18,6 +18,22 @@ namespace GalodaVelha
                                           {" "," "," "," "},
                                           {" "," "," "," "}};
         }
+
+        private Piece AskForPiece()
+        {
+            Console.Write($"{player} choose a piece:\n>");
+            string pieceCode = Console.ReadLine();
+            Console.WriteLine();
+
+            Piece playerChoice = new Piece(pieceCode);
+
+            if (!playerChoice.validity)
+            {
+                playerChoice = AskForPiece();
+            }
+
+            return playerChoice;
+        }
        
     }
 }

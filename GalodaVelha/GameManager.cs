@@ -16,6 +16,7 @@ namespace GalodaVelha
         private void GameSetup()
         {
             mainGame = new GameBoard();
+            Piece.ResetPiecesArray();
         }
         public void GameStart()
         {
@@ -25,6 +26,27 @@ namespace GalodaVelha
             {
                 mainGame.AskForInputs(gameTurn);
                 gameTurn += 1;
+            }
+
+            PlayAgain();
+        }
+        public void PlayAgain()
+        {
+            Console.WriteLine();
+            Console.Write("Do you want to play again ? (y/n)\n> ");
+            string plrChoice = Console.ReadLine();
+
+            switch (plrChoice)
+            {
+                case "y":
+                    GameStart();
+                    break;
+                case "n":
+                    break;
+                default:
+                    Console.WriteLine("\nInvalid answer. Try again,");
+                    PlayAgain();
+                    break;
             }
         }
     }

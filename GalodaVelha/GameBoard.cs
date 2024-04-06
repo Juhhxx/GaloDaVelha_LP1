@@ -15,8 +15,7 @@ namespace GalodaVelha
         string[,] board;
         //Initialize infoBoard array
         Piece[,] infoBoard;
-        //Initialize player value
-        string player = "testValue";
+        //Initialize public variable hasWin
         public bool hasWin;
         
         /// <summary>
@@ -38,9 +37,9 @@ namespace GalodaVelha
         /// </summary>
         public void AskForInputs(int gameTurn)
         {
-            Console.WriteLine();
-            Console.WriteLine("==============================================");
-            Console.WriteLine();
+            string sep = "\n==============================================\n";
+            Console.WriteLine(sep);
+            
             //Get what piece the adversary wants to be played
             Piece placePiece = AskForPiece(gameTurn); 
             //Get the coordinates where the player wants to put the piece
@@ -51,18 +50,17 @@ namespace GalodaVelha
             //Insert the piece into the board matrix with the specified coords
             infoBoard[placeCoords[0],placeCoords[1]] = placePiece;
 
-            Console.WriteLine();
-            Console.WriteLine("==============================================");
-            Console.WriteLine();
+            Console.WriteLine(sep);
+
             hasWin = CheckForGameWin(placeCoords);
             PrintBoard();
+
             if (hasWin)
             {
-                Console.WriteLine();
+                Console.WriteLine(sep);
                 ColoredText($"{WhoPlays(gameTurn)} has won !!!",ConsoleColor.Yellow);
                 Console.WriteLine();
             }
-
         }
         private string WhoPlays(int gameTurn)
         {

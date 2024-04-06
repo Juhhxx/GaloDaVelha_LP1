@@ -62,6 +62,10 @@ namespace GalodaVelha
         /// </summary>
         private void InitializePiece()
         {
+            //Get pieceInfo array
+            string[] pcInfo = GetTrait();
+            //Put info into a string
+            string info = $"{pcInfo[0]},{pcInfo[1]},{pcInfo[2]},{pcInfo[3]}";
             //Check if code is bigger than 4 characters
             if (code.Length >= 5)
             {
@@ -79,7 +83,7 @@ namespace GalodaVelha
                 validity = false;
             }
             //Check if piece is on the piecesCreated array
-            else if(InArray(GetTrait()))
+            else if(InArray(info))
             {
                 //If true print message to the console and set validity to false
                 Console.WriteLine("This piece was already placed.");
@@ -91,7 +95,7 @@ namespace GalodaVelha
                 //If all is false declare myPiece value
                 this.myPiece = newPiece;
                 //Insert piece into piecesCreated array
-                piecesCreated[piecesCount] = GetTrait();
+                piecesCreated[piecesCount] = info;
                 //Add 1 to piecesCount
                 piecesCount += 1;
             }
@@ -181,21 +185,21 @@ namespace GalodaVelha
         /// Get piece instance traits in a string.
         /// </summary>
         /// <returns>String with all piece traits.</returns>
-        public string GetTrait()
+        public string[] GetTrait()
         {
-            //Initialize string variable
-            string traits = "";
+            //Initialize string array
+            string[] traits = new string[4];
 
-            //Check Size trait and add the corret trait to string
-            traits += CheckForTrait(PieceTraits.Size,"big ","tiny ");
-            //Check Color trait and add the corret trait to string
-            traits += CheckForTrait(PieceTraits.Color,"light ","dark ");
-            //Check Shape trait and add the corret trait to string
-            traits += CheckForTrait(PieceTraits.Shape,"square ","circle ");
-            //Check Fill trait and add the corret trait to string
-            traits += CheckForTrait(PieceTraits.Fill,"filled ","empty ");
+            //Check Size trait and add the corret trait to array
+            traits[0] = CheckForTrait(PieceTraits.Size,"big","tiny");
+            //Check Color trait and add the corret trait to array
+            traits[1] = CheckForTrait(PieceTraits.Color,"light","dark");
+            //Check Shape trait and add the corret trait to array
+            traits[2] = CheckForTrait(PieceTraits.Shape,"square","circle");
+            //Check Fill trait and add the corret trait to array
+            traits[3] = CheckForTrait(PieceTraits.Fill,"filled","empty");
             
-            //Return string variable
+            //Return string array
             return traits;
         }
         /// <summary>
@@ -204,8 +208,10 @@ namespace GalodaVelha
         /// <returns>Bool value.</returns>
         public bool GetInArray()
         {
+            //Get pieceInfo array
+            string[] pcInfo = GetTrait();
             //Return bool value
-            return InArray(GetTrait());
+            return InArray($"{pcInfo[0]},{pcInfo[1]},{pcInfo[2]},{pcInfo[3]}");
         }
         /// <summary>
         /// Get name identifier of the piece instance.

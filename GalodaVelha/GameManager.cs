@@ -8,17 +8,24 @@ namespace GalodaVelha
     public class GameManager
     {
         int gameTurn;
-        private GameManager()
+        GameBoard mainGame;
+        public GameManager()
         {
-            gameTurn = 0;
+            gameTurn = 1;
         }
         private void GameSetup()
         {
-
+            mainGame = new GameBoard();
         }
-        private void GameStart()
+        public void GameStart()
         {
-            
+            GameSetup();
+
+            while (!mainGame.hasWin)
+            {
+                mainGame.AskForInputs(gameTurn);
+                gameTurn += 1;
+            }
         }
     }
 }

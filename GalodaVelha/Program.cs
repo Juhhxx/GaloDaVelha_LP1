@@ -7,6 +7,9 @@ namespace GalodaVelha
     {
         static void Main(string[] args)
         {
+            GameManager Game = new GameManager();
+
+            Game.GameStart();
 
         }
     }

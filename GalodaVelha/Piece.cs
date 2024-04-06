@@ -20,13 +20,15 @@ namespace GalodaVelha
         PieceTraits newPiece;
         //Initialize code string
         string code;
-        //Initialize piece name
+        //Initialize piece name representator
         string name;
+        //Initialize piece color
+        ConsoleColor color;
         //Initialize piece validity
         public bool validity;
         //Initialize static array piecesCreated that will keep track of
         //what pieces were created
-        public static string[] piecesCreated;
+        static string[] piecesCreated;
         //Initialize static int piecesCount that counts how many pieces were
         //created
         static int piecesCount;
@@ -39,7 +41,6 @@ namespace GalodaVelha
         {
             //Declare instance variables
             this.code = code;
-            this.name = "A";
             //Decode the given 4 letter string 
             this.newPiece = Decode(code);
             //Declare default value of validity as true
@@ -94,6 +95,10 @@ namespace GalodaVelha
             {
                 //If all is false declare myPiece value
                 this.myPiece = newPiece;
+                //Set piece name representator
+                SetName();
+                //Set piece color
+                SetColor();
                 //Insert piece into piecesCreated array
                 piecesCreated[piecesCount] = info;
                 //Add 1 to piecesCount
@@ -175,12 +180,63 @@ namespace GalodaVelha
                     //If true change check variable to true
                     check = true;
                 }
-                // Console.WriteLine($"{p} = {piece} ?\nResult: {check}");
             }
-            //TESTPRINT: Print newPiece code and check result
-            // Console.WriteLine($"InArray - Piece Code: {newPiece} Result: {check}");
             //Return bool variable
             return check;
+        }
+        private void SetName()
+        {
+            int size = 0;
+            int shape = 0;
+            int filled = 0;
+
+            string[][][] allNames = new string[2][][];
+
+            allNames[0] = new string[2][]; // tinny
+            allNames[1] = new string[2][]; // big
+
+            allNames[0][0] = new string[2]; // tiny circle
+            allNames[0][1] = new string[2]; // tiny square
+            allNames[1][0] = new string[2]; // big circle
+            allNames[1][1] = new string[2]; // big square
+
+            allNames[0][0][0] = "\u25E6"; // tiny circle empty
+            allNames[0][0][1] = "\u2022"; // tiny circle filled
+            allNames[0][1][0] = "\u25AB"; // tiny square empty
+            allNames[0][1][1] = "\u25AA"; // tiny square filled
+            allNames[1][0][0] = "\u25CB"; // big circle empty
+            allNames[1][0][1] = "\u25CF"; // big circle filled
+            allNames[1][1][0] = "\u25A1"; // big square empty
+            allNames[1][1][1] = "\u25A0"; // big square filled
+
+            if ((myPiece & PieceTraits.Size) == PieceTraits.Size)
+            {
+                size = 1;
+            }
+            if ((myPiece & PieceTraits.Shape) == PieceTraits.Shape)
+            {
+                shape = 1;
+            }
+            if ((myPiece & PieceTraits.Fill) == PieceTraits.Fill)
+            {
+                filled = 1;
+            }
+
+            name = allNames[size][shape][filled];
+        }
+        private void SetColor()
+        {
+            ConsoleColor col;
+
+            if ((myPiece & PieceTraits.Color) == PieceTraits.Color)
+            {
+                col = ConsoleColor.Red;
+            }
+            else
+            {
+                col = ConsoleColor.DarkRed;
+            }
+            color = col;
         }
         /// <summary>
         /// Get piece instance traits in a string.
@@ -218,8 +274,13 @@ namespace GalodaVelha
         /// <returns>String value.</returns>
         public string GetName()
         {
-            //Return string value.
+            //Return string value
             return name;
+        }
+        public ConsoleColor GetColor()
+        {
+            //Return ConsoleColor
+            return color;
         }
         /// <summary>
         /// Check for a soecific trait in a piece instance and return a proper
@@ -233,7 +294,6 @@ namespace GalodaVelha
         {
             //Initialize string variable
             string traitName;
-
             //Check if piece has the given trait
             if ((newPiece & trait) == trait)
             {
@@ -245,7 +305,6 @@ namespace GalodaVelha
                 //If false change traitName string to res2
                 traitName = res2;
             }
-
             //Return string variable
             return traitName;
         }

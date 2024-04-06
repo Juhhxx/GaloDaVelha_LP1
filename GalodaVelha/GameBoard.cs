@@ -221,20 +221,69 @@ namespace GalodaVelha
             ColoredText("     A   B   C   D\n",ConsoleColor.Yellow);
             Console.WriteLine(separator);
             ColoredText(" 1",ConsoleColor.Green);
-            Console.WriteLine($" | {board[0,0]} | {board[1,0]} |" +
-            $" {board[2,0]} | {board[3,0]} |");
+            Console.Write(" | ");
+            for (int i = 0; i < 4; i++)
+            {
+                if (infoBoard[i,0] != null)
+                {
+                    ColoredText($"{board[i,0]}",infoBoard[i,0].GetColor());
+                }
+                else
+                {
+                    Console.Write(" ");
+                }
+                
+                Console.Write(" | ");
+            }
+            Console.WriteLine();
             Console.WriteLine(separator);
             ColoredText(" 2",ConsoleColor.Green);
-            Console.WriteLine($" | {board[0,1]} | {board[1,1]} |" +
-            $" {board[2,1]} | {board[3,1]} |");
+            Console.Write(" | ");
+            for (int i = 0; i < 4; i++)
+            {
+                if (infoBoard[i,1] != null)
+                {
+                    ColoredText($"{board[i,1]}",infoBoard[i,1].GetColor());
+                }
+                else
+                {
+                    Console.Write(" ");
+                }
+                Console.Write(" | ");
+            }
+            Console.WriteLine();
             Console.WriteLine(separator);
             ColoredText(" 3",ConsoleColor.Green);
-            Console.WriteLine($" | {board[0,2]} | {board[1,2]} |" +
-            $" {board[2,2]} | {board[3,2]} |");
+            Console.Write(" | ");
+            for (int i = 0; i < 4; i++)
+            {
+                if (infoBoard[i,2] != null)
+                {
+                    ColoredText($"{board[i,2]}",infoBoard[i,2].GetColor());
+                }
+                else
+                {
+                    Console.Write(" ");
+                }
+                Console.Write(" | ");
+            }
+            Console.WriteLine();
             Console.WriteLine(separator);
             ColoredText(" 4",ConsoleColor.Green);
-            Console.WriteLine($" | {board[0,3]} | {board[1,3]} |" +
-            $" {board[2,3]} | {board[3,3]} |");
+            Console.Write(" | ");
+            for (int i = 0; i < 4; i++)
+            {
+                if (infoBoard[i,3] != null)
+                {
+                    ColoredText($"{board[i,3]}",infoBoard[i,3].GetColor());
+                }
+                else
+                {
+                    Console.Write(" ");
+                };
+                Console.Write(" | ");
+            }
+            Console.WriteLine();
             Console.WriteLine(separator);
         }
         /// <summary>

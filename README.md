@@ -62,21 +62,24 @@ Para este projeto, escolhemos dividi-lo em 3 classes diferentes e ainda duas enu
 
 ```mermaid
 graph TB
-    A("Main()") --> B("GameStart()") --> C("GameSetup()")
-    C --> D{Win condition\nor Draw is verified?}
+A(["Start"]) --> C("The board is reset")
+    C -- Game loop begins --> D{Is win condition\nor draw detected?}
     subgraph MainLoop
-
-      D -- No --> F{"AskForInputs()"}
-      F --- J[Increment game turn] --> D
-
+        D -- No --> F[["Ask For Inputs"]]
+        subgraph Inputs
+        F --- G[/"Ask For a Piece"/]
+        G --> K{"Piece already on board?"} 
+        K -- No --> I[/"AskForCoords()"/]
+        K --Yes --> G
+        I --> Q{Is the coordinate\n in the board and unnocuppied}
+        end
+        Q -- Yes --> M[[Place Piece in Board]]
+        Q -- No --> I
+        M --> J[Increment game turn] --> D
     end
-    subgraph AskForInput
-      F --> G("AskForPiece()")
-      G--> H("AskForCoords()") -->I((PlacePiece))
-    end
-    D --> E("PlayAgain()") 
-    E("PlayAgain()") -- yes --> C
-    E("PlayAgain()") -- no --> K[EXIT PROGRAM]
+    D -- Yes --> E("PlayAgain()") 
+    E -- Yes --> C
+    E -- No --> P([End]) 
 ```
 
 ## Referências

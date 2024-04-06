@@ -39,7 +39,7 @@ namespace GalodaVelha
         {
             string sep = "\n==============================================\n";
             Console.WriteLine(sep);
-            
+            Console.WriteLine($"Turn: {gameTurn}\n");
             //Get what piece the adversary wants to be played
             Piece placePiece = AskForPiece(gameTurn); 
             //Get the coordinates where the player wants to put the piece
@@ -60,6 +60,13 @@ namespace GalodaVelha
                 Console.WriteLine(sep);
                 ColoredText($"{WhoPlays(gameTurn)} has won !!!",ConsoleColor.Yellow);
                 Console.WriteLine();
+            }
+            else if (gameTurn == 16)
+            {
+                Console.WriteLine(sep);
+                ColoredText("There is a draw between the 2 players.",ConsoleColor.Cyan);
+                Console.WriteLine();
+                hasWin = true;
             }
         }
         private string WhoPlays(int gameTurn)

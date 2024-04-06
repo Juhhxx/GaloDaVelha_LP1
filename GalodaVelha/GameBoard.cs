@@ -17,6 +17,7 @@ namespace GalodaVelha
         Piece[,] infoBoard;
         //Initialize player value
         string player = "testValue";
+        public bool hasWin;
         
         /// <summary>
         /// Constructor for GameBoard class.
@@ -29,37 +30,63 @@ namespace GalodaVelha
                                           {" "," "," "," "},
                                           {" "," "," "," "}};
             this.infoBoard = new Piece[4,4];
+            this.hasWin = false;
         }
         /// <summary>
         /// Call AskForPiece() and AskForCoords() methods and insert the
         /// results to the board matrix.
         /// </summary>
-        public void AskForInputs()
+        public void AskForInputs(int gameTurn)
         {
+            Console.WriteLine();
+            Console.WriteLine("==============================================");
+            Console.WriteLine();
             //Get what piece the adversary wants to be played
-            Piece placePiece = AskForPiece(); 
+            Piece placePiece = AskForPiece(gameTurn); 
             //Get the coordinates where the player wants to put the piece
-            int[] placeCoords = AskForCoords();
+            int[] placeCoords = AskForCoords(gameTurn);
             //Insert the piece name into the board matrix with the 
             //specified coords
             board[placeCoords[0],placeCoords[1]] = placePiece.GetName();
             //Insert the piece into the board matrix with the specified coords
             infoBoard[placeCoords[0],placeCoords[1]] = placePiece;
 
-            if (CheckForGameWin(placeCoords,"AAAA"))
+            Console.WriteLine();
+            Console.WriteLine("==============================================");
+            Console.WriteLine();
+            hasWin = CheckForGameWin(placeCoords);
+            PrintBoard();
+            if (hasWin)
             {
-                Console.WriteLine("GANHOUUU");
-
+                Console.WriteLine();
+                ColoredText($"{WhoPlays(gameTurn)} has won !!!",ConsoleColor.Yellow);
+                Console.WriteLine();
             }
+
+        }
+        private string WhoPlays(int gameTurn)
+        {
+            string player;
+            if (gameTurn % 2 == 0)
+            {
+                player = "Player 2";
+            }
+            else
+            {
+                player = "Player 1";
+            }
+
+            return player;
         }
         /// <summary>
         /// Ask the adversary what piece they want to give to the player.
         /// </summary>
         /// <returns>Piece class instance with the specified traits.</returns>
-        private Piece AskForPiece()
+        private Piece AskForPiece(int turn)
         {
             //Ask the adversary for a piece
-            Console.Write($"{player} choose a piece:\n> ");
+            ColoredText(WhoPlays(turn + 1),ConsoleColor.Blue);
+            Console.Write($" choose a piece:\n> ");
             string pieceCode = Console.ReadLine();
             Console.WriteLine();
 
@@ -70,7 +97,7 @@ namespace GalodaVelha
             if (!playerChoice.validity)
             {
                 //If false call AskForPiece() again
-                playerChoice = AskForPiece();
+                playerChoice = AskForPiece(turn);
             }
 
             //Return the specified piece
@@ -81,13 +108,14 @@ namespace GalodaVelha
         /// given piece.
         /// </summary>
         /// <returns>Array of integers with the XY coordinates.</returns>
-        private int[] AskForCoords()
+        private int[] AskForCoords(int turn)
         {
             //Initialize an integer array to store the coords
             int[] coords = new int[2];
 
             //Ask the player for the coordinates
-            Console.Write($"{player} choose a coordinate to place:\n> ");
+            ColoredText(WhoPlays(turn),ConsoleColor.Blue);
+            Console.Write($" choose a coordinate to place:\n> ");
             string coordsInput = Console.ReadLine();
             Console.WriteLine();
 
@@ -117,7 +145,7 @@ namespace GalodaVelha
                         //call AskForCoords() again
                         Console.WriteLine("Invalid coord, already occupied!");
                         Console.WriteLine("Please try again.\n");
-                        coords = AskForCoords();
+                        coords = AskForCoords(turn);
                     }
                 }
                 else
@@ -126,7 +154,7 @@ namespace GalodaVelha
                     //call AskForCoords() again
                     Console.WriteLine("Invalid coord, out of board range!");
                     Console.WriteLine("Please try again.\n");
-                    coords = AskForCoords();
+                    coords = AskForCoords(turn);
                 }
             }
             else
@@ -135,7 +163,7 @@ namespace GalodaVelha
                 //call AskForCoords() again
                 Console.WriteLine("Invalid coord, more than 2 values given!");
                 Console.WriteLine("Please try again.\n");
-                coords = AskForCoords();
+                coords = AskForCoords(turn);
             }
 
             //Return the integer array with the XY coordinates
@@ -225,7 +253,7 @@ namespace GalodaVelha
             //Reset console color
             Console.ResetColor();
         }
-        private bool CheckForGameWin(int[] lastCoords, string player)
+        private bool CheckForGameWin(int[] lastCoords)
         {
             bool check = false;
 

@@ -99,7 +99,7 @@ namespace GalodaVelha
                 //Add 1 to piecesCount
                 piecesCount += 1;
 
-                Console.WriteLine($"{GetTrait()[0]},{GetTrait()[1]},{GetTrait()[2]},{GetTrait()[3]}");
+                // Console.WriteLine($"{GetTrait()[0]},{GetTrait()[1]},{GetTrait()[2]},{GetTrait()[3]}");
             }
         }
         /// <summary>
@@ -175,10 +175,10 @@ namespace GalodaVelha
                     //If true change check variable to true
                     check = true;
                 }
-                Console.WriteLine($"{p} = {piece} ?\nResult: {check}");
+                // Console.WriteLine($"{p} = {piece} ?\nResult: {check}");
             }
             //TESTPRINT: Print newPiece code and check result
-            Console.WriteLine($"InArray - Piece Code: {newPiece} Result: {check}");
+            // Console.WriteLine($"InArray - Piece Code: {newPiece} Result: {check}");
             //Return bool variable
             return check;
         }

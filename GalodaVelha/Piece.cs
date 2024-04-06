@@ -230,11 +230,11 @@ namespace GalodaVelha
 
             if ((myPiece & PieceTraits.Color) == PieceTraits.Color)
             {
-                col = ConsoleColor.Red;
+                col = ConsoleColor.Magenta;
             }
             else
             {
-                col = ConsoleColor.DarkRed;
+                col = ConsoleColor.Red;
             }
             color = col;
         }
@@ -261,13 +261,7 @@ namespace GalodaVelha
         /// Get InArray() value from outside the class.
         /// </summary>
         /// <returns>Bool value.</returns>
-        public bool GetInArray()
-        {
-            //Get pieceInfo array
-            string[] pcInfo = GetTrait();
-            //Return bool value
-            return InArray($"{pcInfo[0]},{pcInfo[1]},{pcInfo[2]},{pcInfo[3]}");
-        }
+        // 
         /// <summary>
         /// Get name identifier of the piece instance.
         /// </summary>

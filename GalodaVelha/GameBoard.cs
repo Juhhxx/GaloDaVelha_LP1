@@ -45,6 +45,12 @@ namespace GalodaVelha
             board[placeCoords[0],placeCoords[1]] = placePiece.GetName();
             //Insert the piece into the board matrix with the specified coords
             infoBoard[placeCoords[0],placeCoords[1]] = placePiece;
+
+            if (CheckForGameWin(placeCoords,"AAAA"))
+            {
+                Console.WriteLine("GANHOUUU");
+
+            }
         }
         /// <summary>
         /// Ask the adversary what piece they want to give to the player.
@@ -81,7 +87,7 @@ namespace GalodaVelha
             int[] coords = new int[2];
 
             //Ask the player for the coordinates
-            Console.Write($"{player} choose a coordinate to place:\n>");
+            Console.Write($"{player} choose a coordinate to place:\n> ");
             string coordsInput = Console.ReadLine();
             Console.WriteLine();
 
@@ -184,24 +190,26 @@ namespace GalodaVelha
         /// </summary>
         public void PrintBoard()
         {
+            string separator = "   +---+---+---+---+";
+
             ColoredText("     A   B   C   D\n",ConsoleColor.Yellow);
-            Console.WriteLine("   +---+---+---+---+");
+            Console.WriteLine(separator);
             ColoredText(" 1",ConsoleColor.Green);
             Console.WriteLine($" | {board[0,0]} | {board[1,0]} |" +
             $" {board[2,0]} | {board[3,0]} |");
-            Console.WriteLine("   +---+---+---+---+");
+            Console.WriteLine(separator);
             ColoredText(" 2",ConsoleColor.Green);
             Console.WriteLine($" | {board[0,1]} | {board[1,1]} |" +
             $" {board[2,1]} | {board[3,1]} |");
-            Console.WriteLine("   +---+---+---+---+");
+            Console.WriteLine(separator);
             ColoredText(" 3",ConsoleColor.Green);
             Console.WriteLine($" | {board[0,2]} | {board[1,2]} |" +
             $" {board[2,2]} | {board[3,2]} |");
-            Console.WriteLine("   +---+---+---+---+");
+            Console.WriteLine(separator);
             ColoredText(" 4",ConsoleColor.Green);
             Console.WriteLine($" | {board[0,3]} | {board[1,3]} |" +
             $" {board[2,3]} | {board[3,3]} |");
-            Console.WriteLine("   +---+---+---+---+");
+            Console.WriteLine(separator);
         }
         /// <summary>
         /// Print colored text to the console.
@@ -217,10 +225,119 @@ namespace GalodaVelha
             //Reset console color
             Console.ResetColor();
         }
-        private bool CheckForGameWin(int[] lastCoords)
+        private bool CheckForGameWin(int[] lastCoords, string player)
         {
             bool check = false;
 
+            for (int i = 0; i < 4; i++)
+            {
+                check = checkXWin(0,lastCoords[1],i);
+                if (check) break;
+                check = checkYWin(lastCoords[0],0,i);
+                if (check) break;
+                check = checkDiagonalPosWin(0,0,i);
+                if (check) break;
+                check = checkDiagonalNegWin(3,0,i);
+                if (check) break;
+            }
+
+            return check;
+        }
+        private bool checkXWin(int x, int y, int traitCheck)
+        {
+            bool check = true;
+
+            if (infoBoard[x,y] != null && infoBoard[x + 1,y] != null)
+            {
+                if (infoBoard[x,y].GetTrait()[traitCheck] == infoBoard[x + 1,y].GetTrait()[traitCheck])
+                {
+                    if (x < 2)
+                    {
+                        check = checkXWin(x + 1,y,traitCheck);
+                    }
+                }
+                else
+                {
+                    check = false;
+                }
+            }
+            else
+            {
+                check = false;
+            }
+            return check;
+        }
+        private bool checkYWin(int x, int y, int traitCheck)
+        {
+            bool check = true;
+
+            if (infoBoard[x,y] != null && infoBoard[x,y + 1] != null)
+            {
+                if (infoBoard[x,y].GetTrait()[traitCheck] == infoBoard[x,y + 1].GetTrait()[traitCheck])
+                {
+                    if (y < 2)
+                    {
+                        check = checkYWin(x,y + 1,traitCheck);
+                    }
+                }
+                else
+                {
+                    check = false;
+                }
+            }
+            else
+            {
+                check = false;
+            }
+
+            return check;
+        }
+        private bool checkDiagonalPosWin(int x, int y, int traitCheck)
+        {
+            bool check = true;
+
+            if (infoBoard[x,y] != null && infoBoard[x + 1,y + 1] != null)
+            {
+                if (infoBoard[x,y].GetTrait()[traitCheck] == infoBoard[x + 1,y + 1].GetTrait()[traitCheck])
+                {
+                    if (x < 2 && y < 2)
+                    {
+                        check = checkDiagonalPosWin(x + 1,y + 1,traitCheck);
+                    }
+                }
+                else
+                {
+                    check = false;
+                }
+            }
+            else
+            {
+                check = false;
+            }
+            return check;
+        }
+        private bool checkDiagonalNegWin(int x, int y, int traitCheck)
+        {
+            bool check = true;
+
+            if (infoBoard[x,y] != null && infoBoard[x - 1,y + 1] != null)
+            {
+                if (infoBoard[x,y].GetTrait()[traitCheck] == infoBoard[x - 1,y + 1].GetTrait()[traitCheck])
+                {
+                    if (x > 0 && y < 2)
+                    {
+                        check = checkDiagonalNegWin(x - 1,y + 1,traitCheck);
+                    }
+                }
+                else
+                {
+                    check = false;
+                }
+            }
+            else
+            {
+                check = false;
+            }
             return check;
         }
 

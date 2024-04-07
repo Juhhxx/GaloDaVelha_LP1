@@ -28,18 +28,22 @@ namespace GalodaVelha
                                           {" "," "," "," "},
                                           {" "," "," "," "},
                                           {" "," "," "," "}};
+            //Declare the infoBoard array
             this.infoBoard = new Piece[4,4];
+            //Set hasWin as false
             this.hasWin = false;
         }
         /// <summary>
         /// Call AskForPiece() and AskForCoords() methods and insert the
         /// results to the board matrix.
         /// </summary>
+        /// <param name="gameTurn">Integer game turn.</param>
         public void AskForInputs(int gameTurn)
         {
             string sep = "\n==============================================\n";
             Console.WriteLine(sep);
             Console.WriteLine($"Turn: {gameTurn}\n");
+
             //Get what piece the adversary wants to be played
             Piece placePiece = AskForPiece(gameTurn); 
             //Get the coordinates where the player wants to put the piece
@@ -51,41 +55,55 @@ namespace GalodaVelha
             infoBoard[placeCoords[0],placeCoords[1]] = placePiece;
 
             Console.WriteLine(sep);
-
+            //Update hasWin
             hasWin = CheckForGameWin(placeCoords);
+            //Print game board
             PrintBoard();
-
+            //Check hasWin
             if (hasWin)
             {
+                //If true print message to the console
                 Console.WriteLine(sep);
                 ColoredText($"{WhoPlays(gameTurn)} has won !!!",ConsoleColor.Yellow);
                 Console.WriteLine();
             }
+            //Check if 16 turns have passed
             else if (gameTurn == 16)
             {
+                //If true and hasWin is false print message to the console
                 Console.WriteLine(sep);
                 ColoredText("There is a draw between the 2 players.",ConsoleColor.Cyan);
                 Console.WriteLine();
                 hasWin = true;
             }
         }
+        /// <summary>
+        /// See what player is doing an action.
+        /// </summary>
+        /// <param name="gameTurn">Integer game turn.</param>
+        /// <returns>String of who is playing.</returns>
         private string WhoPlays(int gameTurn)
         {
+            //Initialize string variable
             string player;
+            //If module of gameTurn/2 is 0
             if (gameTurn % 2 == 0)
             {
+                //If true set player as Player 2
                 player = "Player 2";
             }
             else
             {
+                //If false set player as Player 1
                 player = "Player 1";
             }
-
+            //Return string variable
             return player;
         }
         /// <summary>
         /// Ask the adversary what piece they want to give to the player.
         /// </summary>
+        /// <param name="gameTurn">Integer game turn.</param>
         /// <returns>Piece class instance with the specified traits.</returns>
         private Piece AskForPiece(int turn)
         {
@@ -112,6 +130,7 @@ namespace GalodaVelha
         /// Ask the player for the coordiantes where he wants to insert the 
         /// given piece.
         /// </summary>
+        /// <param name="gameTurn">Integer game turn.</param>
         /// <returns>Array of integers with the XY coordinates.</returns>
         private int[] AskForCoords(int turn)
         {
@@ -307,119 +326,188 @@ namespace GalodaVelha
             //Reset console color
             Console.ResetColor();
         }
+        /// <summary>
+        /// Check if a player has won the game.
+        /// </summary>
+        /// <param name="lastCoords"></param>
+        /// <returns></returns>
         private bool CheckForGameWin(int[] lastCoords)
         {
+            //Initialize bool variable as false
             bool check = false;
-
+            //Go for each PieceTrait
             for (int i = 0; i < 4; i++)
             {
+                //Check if there was a win in the x axis of the lastCoord called
                 check = CheckXWin(0,lastCoords[1],i);
+                //If check is true break loop
                 if (check) break;
+                //Check if there was a win in the y axis of the lastCoord called
                 check = CheckYWin(lastCoords[0],0,i);
+                //If check is true break loop
                 if (check) break;
+                //Check if there was a win on the positive diagonal
                 check = CheckDiagonalPosWin(0,0,i);
+                //If check is true break loop
                 if (check) break;
+                //Check if there was a win on the negative diagonal
                 check = CheckDiagonalNegWin(3,0,i);
+                //If check is true break loop
                 if (check) break;
             }
-
+            //Return bool variable
             return check;
         }
+        /// <summary>
+        /// Check for a win in the X axis of the given coords.
+        /// </summary>
+        /// <param name="x">X coord.</param>
+        /// <param name="y">Y coord.</param>
+        /// <param name="traitCheck">Trait to be checked.</param>
+        /// <returns>Bool value.</returns>
         private bool CheckXWin(int x, int y, int traitCheck)
         {
+            //Initialize bool variable as true
             bool check = true;
-
+            //Check if the current cell and next cell in the matrix are not null
             if (infoBoard[x,y] != null && infoBoard[x + 1,y] != null)
             {
+                //If true check if the specifeid trait is equal among them
                 if (infoBoard[x,y].GetTrait()[traitCheck] == infoBoard[x + 1,y].GetTrait()[traitCheck])
                 {
+                    //If true check if in the last cell
                     if (x < 2)
                     {
+                        //If true call CheckXWin() with the next cell
                         check = CheckXWin(x + 1,y,traitCheck);
                     }
                 }
                 else
                 {
+                    //If false set check to false
                     check = false;
                 }
             }
             else
             {
+                //If false set check to false
                 check = false;
             }
+            //Return bool variable
             return check;
         }
+        /// <summary>
+        /// Check for a win in the Y axis of the given coords.
+        /// </summary>
+        /// <param name="x">X coord.</param>
+        /// <param name="y">Y coord.</param>
+        /// <param name="traitCheck">Trait to be checked.</param>
+        /// <returns>Bool value.</returns>
         private bool CheckYWin(int x, int y, int traitCheck)
         {
+            //Initialize bool variable as true
             bool check = true;
-
+            //Check if the current cell and next cell in the matrix are not null
             if (infoBoard[x,y] != null && infoBoard[x,y + 1] != null)
             {
+                //If true check if the specifeid trait is equal among them
                 if (infoBoard[x,y].GetTrait()[traitCheck] == infoBoard[x,y + 1].GetTrait()[traitCheck])
                 {
+                    //If true check if in the last cell
                     if (y < 2)
                     {
+                        //If true call CheckXWin() with the next cell
                         check = CheckYWin(x,y + 1,traitCheck);
                     }
                 }
                 else
                 {
+                    //If false set check to false
                     check = false;
                 }
             }
             else
             {
+                //If false set check to false
                 check = false;
             }
-
+            //Return bool variable
             return check;
         }
+        /// <summary>
+        /// Check for a win in the positive diagonal.
+        /// </summary>
+        /// <param name="x">X coord.</param>
+        /// <param name="y">Y coord.</param>
+        /// <param name="traitCheck">Trait to be checked.</param>
+        /// <returns>Bool value.</returns>
         private bool CheckDiagonalPosWin(int x, int y, int traitCheck)
         {
+            //Initialize bool variable as true
             bool check = true;
-
+            //Check if the current cell and next cell in the matrix are not null
             if (infoBoard[x,y] != null && infoBoard[x + 1,y + 1] != null)
             {
+                //If true check if the specifeid trait is equal among them
                 if (infoBoard[x,y].GetTrait()[traitCheck] == infoBoard[x + 1,y + 1].GetTrait()[traitCheck])
                 {
+                    //If true check if in the last cell
                     if (x < 2 && y < 2)
                     {
+                        //If true call CheckXWin() with the next cell
                         check = CheckDiagonalPosWin(x + 1,y + 1,traitCheck);
                     }
                 }
                 else
                 {
+                    //If false set check to false
                     check = false;
                 }
             }
             else
             {
+                //If false set check to false
                 check = false;
             }
+            //Return bool variable
             return check;
         }
+        /// <summary>
+        /// Check for a win in the negative diagonal.
+        /// </summary>
+        /// <param name="x">X coord.</param>
+        /// <param name="y">Y coord.</param>
+        /// <param name="traitCheck">Trait to be checked.</param>
+        /// <returns>Bool value.</returns>
         private bool CheckDiagonalNegWin(int x, int y, int traitCheck)
         {
+            //Initialize bool variable as true
             bool check = true;
-
+            //Check if the current cell and next cell in the matrix are not null
             if (infoBoard[x,y] != null && infoBoard[x - 1,y + 1] != null)
             {
+                //If true check if the specifeid trait is equal among them
                 if (infoBoard[x,y].GetTrait()[traitCheck] == infoBoard[x - 1,y + 1].GetTrait()[traitCheck])
                 {
+                    //If true check if in the last cell
                     if (x > 0 && y < 2)
                     {
+                        //If true call CheckXWin() with the next cell
                         check = CheckDiagonalNegWin(x - 1,y + 1,traitCheck);
                     }
                 }
                 else
                 {
+                    //If false set check to false
                     check = false;
                 }
             }
             else
             {
+                //If false set check to false
                 check = false;
             }
+            //Return bool variable
             return check;
         }
 

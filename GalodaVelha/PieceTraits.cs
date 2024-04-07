@@ -2,6 +2,9 @@ using System;
 
 namespace GalodaVelha
 {
+    /// <summary>
+    /// Enum that contains all Piece traits.
+    /// </summary>
     [Flags]
     public enum PieceTraits
     {
@@ -13,7 +16,8 @@ namespace GalodaVelha
                     //otherwise it is circular
         Fill = 1 << 3,  //if this trait is active then the piece has a filling,
                     //otherwise it is empty
-        Wrong = 1 << 4 
+        Wrong = 1 << 4 //if this trait is active there was a unknown character
+                    //in the piece code input
 
     }
 }

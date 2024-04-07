@@ -22,8 +22,9 @@ Trabalho realizado por:
 
 ### Descrição
 
-Para este projeto, escolhemos dividi-lo em 3 classes diferentes e ainda duas enumerações (não contando com o ficheiro Program):
+Para este projeto, escolhemos dividi-lo em 3 classes diferentes e ainda duas enumerações.
 
+Comçando pelo Main() dá-se uma instanciação de um objeto GameManager, chamando de seguida o método GameStart()
 1. **Class GameManager**
    - Responsável por "gerir" o jogo à qual pertencem os métodos:
       - **GameSetup()** - instancia um novo objeto da classe GameBoard, estabelecendo as condições referentes ao estado zero do jogo;

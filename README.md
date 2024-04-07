@@ -24,6 +24,8 @@ Trabalho realizado por:
 
 Para este projeto, escolhemos dividi-lo em 3 classes diferentes e ainda duas enumerações.
 
+É relevante também referir que este programa corre em qualquer consola, mas é preferível o Windows Powershell e a consola do Visual Studio, pois apenas nestes foi possível representar as cores adequadamente, assim como os caracteres Unicode escolhidos.
+
 Comçando pelo Main() dá-se uma instanciação de um objeto GameManager, chamando de seguida o método GameStart()
 1. **Class GameManager**
    - Responsável por "gerir" o jogo à qual pertencem os métodos:

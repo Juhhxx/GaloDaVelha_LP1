@@ -103,8 +103,6 @@ namespace GalodaVelha
                 piecesCreated[piecesCount] = info;
                 //Add 1 to piecesCount
                 piecesCount += 1;
-
-                // Console.WriteLine($"{GetTrait()[0]},{GetTrait()[1]},{GetTrait()[2]},{GetTrait()[3]}");
             }
         }
         /// <summary>
@@ -184,22 +182,27 @@ namespace GalodaVelha
             //Return bool variable
             return check;
         }
+        /// <summary>
+        /// Set piece instance name identifier.
+        /// </summary>
         private void SetName()
         {
+            //Intialize int variables as 0
             int size = 0;
             int shape = 0;
             int filled = 0;
-
+            //Initialize a 3D array
             string[][][] allNames = new string[2][][];
-
+            //Initialize big and tiny arrays
             allNames[0] = new string[2][]; // tinny
             allNames[1] = new string[2][]; // big
-
+            //Initialize circle and square arrays
             allNames[0][0] = new string[2]; // tiny circle
             allNames[0][1] = new string[2]; // tiny square
             allNames[1][0] = new string[2]; // big circle
             allNames[1][1] = new string[2]; // big square
-
+            //Initialize empty and filled arrays with the specified unicode
+            //characters to represent the piece
             allNames[0][0][0] = "\u25E6"; // tiny circle empty
             allNames[0][0][1] = "\u2022"; // tiny circle filled
             allNames[0][1][0] = "\u25AB"; // tiny square empty
@@ -208,34 +211,47 @@ namespace GalodaVelha
             allNames[1][0][1] = "\u25CF"; // big circle filled
             allNames[1][1][0] = "\u25A1"; // big square empty
             allNames[1][1][1] = "\u25A0"; // big square filled
-
+            //Check if myPiece Size trait is active
             if ((myPiece & PieceTraits.Size) == PieceTraits.Size)
             {
+                //If true set size as 1
                 size = 1;
             }
+            //Check if myPiece Shape trait is active
             if ((myPiece & PieceTraits.Shape) == PieceTraits.Shape)
             {
+                //If true set shape as 1
                 shape = 1;
             }
+            //Check if myPiece Fill trait is active
             if ((myPiece & PieceTraits.Fill) == PieceTraits.Fill)
             {
+                //If true set filled as 1
                 filled = 1;
             }
-
+            //Set piece name as the specified unicode character based on the
+            //integer variables
             name = allNames[size][shape][filled];
         }
+        /// <summary>
+        /// Set piece instance color.
+        /// </summary>
         private void SetColor()
         {
+            //Initialize ConsoleColor type variable
             ConsoleColor col;
-
+            //Check if myPiece color trait is active
             if ((myPiece & PieceTraits.Color) == PieceTraits.Color)
             {
+                //If true set color as ConsoleColor.Mangenta
                 col = ConsoleColor.Magenta;
             }
             else
             {
+                //If false set color as ConsoleColor.Red
                 col = ConsoleColor.Red;
             }
+            //Set piece color as col
             color = col;
         }
         /// <summary>
@@ -258,11 +274,6 @@ namespace GalodaVelha
             return traits;
         }
         /// <summary>
-        /// Get InArray() value from outside the class.
-        /// </summary>
-        /// <returns>Bool value.</returns>
-        // 
-        /// <summary>
         /// Get name identifier of the piece instance.
         /// </summary>
         /// <returns>String value.</returns>
@@ -271,6 +282,10 @@ namespace GalodaVelha
             //Return string value
             return name;
         }
+        /// <summary>
+        /// Get color of piece instance.
+        /// </summary>
+        /// <returns>ConsoleColor type variable.</returns>
         public ConsoleColor GetColor()
         {
             //Return ConsoleColor
@@ -302,8 +317,13 @@ namespace GalodaVelha
             //Return string variable
             return traitName;
         }
+        /// <summary>
+        /// Reset the array containing all pieces that were created during 
+        /// the game.
+        /// </summary>
         public static void ResetPiecesArray()
         {
+            //Initialize new piecesCreated array
             Piece.piecesCreated = new string[16];
         }
     }

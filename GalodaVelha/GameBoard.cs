@@ -43,6 +43,15 @@ namespace GalodaVelha
             string sep = "\n==============================================\n";
             Console.WriteLine(sep);
             Console.WriteLine($"Turn: {gameTurn}\n");
+            //Check if gameTurn is 1
+            if (gameTurn == 1)
+            {
+                //If true print a tutorial to the console
+                ColoredText("\nThis game is played by two players. Starting with whoever the players choose, the 1st player in the round will choose a piece for the next player to play. The player that plays second chooses the coordinates of where they want to place the piece chosen by the 1st player. On the next turn, the player that played first the round before will now be playing last, switching roles with the previous 2nd player. Each piece has four traits (Size, Color, Shape and Fill), each one varying between two possibilities (big or tiny, light or dark, square or circular, filled or empty.\n",ConsoleColor.Yellow);
+                ColoredText("\nThe player that is responsible of choosing which pice will be placed thatround must insert a code of 4 letters, referencing each specific trait of the chosen piece (e.x ' tlse ' for a tiny piece with a light color, square body and that has an empty body)\n",ConsoleColor.Yellow);
+                ColoredText("\nThe player choosing the coordinates must insert a code of 2 characters - one letter, referencing the column and one number for the row (e.x ' B3 ' refers to the cell found by intersecting column 2 and row 3)\n",ConsoleColor.Yellow);
+                ColoredText("\nThe game is won by the player that manages to place the piece that completes a row, column or diagonal where it is at least verified a common trait amongst the possible 4 between all 4 pieces.\n\n",ConsoleColor.Yellow);
+            }
 
             //Get what piece the adversary wants to be played
             Piece placePiece = AskForPiece(gameTurn); 

@@ -69,7 +69,7 @@ A(["Start"]) --> C("The board is reset")
         subgraph Inputs
         F --- G[/"Ask For a Piece"/]
         G --> K{"Piece already on board?"} 
-        K -- No --> I[/"AskForCoords()"/]
+        K -- No --> I[/"Ask For Coords"/]
         K --Yes --> G
         I --> Q{Is the coordinate\n in the board and unnocuppied}
         end

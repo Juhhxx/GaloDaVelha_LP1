@@ -5,11 +5,15 @@
 Trabalho realizado por:
 - Afonso Cunha - a22302960
   - Responsável por:
-    - Maior parte do código da Classe Piece;
+    - Código da Classe Piece;
+    - Relatório Markdown
+    - Enum PieceTraits;
 - Júlia Costa - a22304403
   - Responsável por:
-    - Parte do código da Classe Piece;
+    - Código da Classe Piece;
     - Código da Classe GameBoard;
+    - Código da Classe GameManager;
+    - Enum XCoords;
     - Documentação das Classes GameBoard e Piece;
 
 [URL para o repositório Git](https://github.com/Juhhxx/GaloDaVelha_LP1)
@@ -62,18 +66,18 @@ Para este projeto, escolhemos dividi-lo em 3 classes diferentes e ainda duas enu
 
 ```mermaid
 graph TB
-A(["Start"]) --> C("The board is reset")
+A(["Start"]) --> C("Zero state board is set")
     C -- Game loop begins --> D{Is win condition\nor draw detected?}
     subgraph MainLoop
-        D -- No --> F[["Ask For Inputs"]]
+        D -- No --> F[["Ask for Inputs"]]
         subgraph Inputs
-        F --- G[/"Ask For a Piece"/]
+        F --- G[/"Ask for a Piece"/]
         G --> K{"Piece already on board?"} 
-        K -- No --> I[/"Ask For Coords"/]
+        K -- No --> I[/"Ask for Coords"/]
         K --Yes --> G
         I --> Q{Is the coordinate\n in the board and unnocuppied}
         end
-        Q -- Yes --> M[[Place Piece in Board]]
+        Q -- Yes --> M[[Place Piece on Board]]
         Q -- No --> I
         M --> J[Increment game turn] --> D
     end

@@ -313,19 +313,19 @@ namespace GalodaVelha
 
             for (int i = 0; i < 4; i++)
             {
-                check = checkXWin(0,lastCoords[1],i);
+                check = CheckXWin(0,lastCoords[1],i);
                 if (check) break;
-                check = checkYWin(lastCoords[0],0,i);
+                check = CheckYWin(lastCoords[0],0,i);
                 if (check) break;
-                check = checkDiagonalPosWin(0,0,i);
+                check = CheckDiagonalPosWin(0,0,i);
                 if (check) break;
-                check = checkDiagonalNegWin(3,0,i);
+                check = CheckDiagonalNegWin(3,0,i);
                 if (check) break;
             }
 
             return check;
         }
-        private bool checkXWin(int x, int y, int traitCheck)
+        private bool CheckXWin(int x, int y, int traitCheck)
         {
             bool check = true;
 
@@ -335,7 +335,7 @@ namespace GalodaVelha
                 {
                     if (x < 2)
                     {
-                        check = checkXWin(x + 1,y,traitCheck);
+                        check = CheckXWin(x + 1,y,traitCheck);
                     }
                 }
                 else
@@ -349,7 +349,7 @@ namespace GalodaVelha
             }
             return check;
         }
-        private bool checkYWin(int x, int y, int traitCheck)
+        private bool CheckYWin(int x, int y, int traitCheck)
         {
             bool check = true;
 
@@ -359,7 +359,7 @@ namespace GalodaVelha
                 {
                     if (y < 2)
                     {
-                        check = checkYWin(x,y + 1,traitCheck);
+                        check = CheckYWin(x,y + 1,traitCheck);
                     }
                 }
                 else
@@ -374,7 +374,7 @@ namespace GalodaVelha
 
             return check;
         }
-        private bool checkDiagonalPosWin(int x, int y, int traitCheck)
+        private bool CheckDiagonalPosWin(int x, int y, int traitCheck)
         {
             bool check = true;
 
@@ -384,7 +384,7 @@ namespace GalodaVelha
                 {
                     if (x < 2 && y < 2)
                     {
-                        check = checkDiagonalPosWin(x + 1,y + 1,traitCheck);
+                        check = CheckDiagonalPosWin(x + 1,y + 1,traitCheck);
                     }
                 }
                 else
@@ -398,7 +398,7 @@ namespace GalodaVelha
             }
             return check;
         }
-        private bool checkDiagonalNegWin(int x, int y, int traitCheck)
+        private bool CheckDiagonalNegWin(int x, int y, int traitCheck)
         {
             bool check = true;
 
@@ -408,7 +408,7 @@ namespace GalodaVelha
                 {
                     if (x > 0 && y < 2)
                     {
-                        check = checkDiagonalNegWin(x - 1,y + 1,traitCheck);
+                        check = CheckDiagonalNegWin(x - 1,y + 1,traitCheck);
                     }
                 }
                 else
